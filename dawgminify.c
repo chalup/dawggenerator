@@ -1,5 +1,4 @@
 #include "dawgminify.h"
-#include "dict.h"
 
 int bit_masks[8] = {
 	0x00000001, // 00000001

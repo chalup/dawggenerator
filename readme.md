@@ -39,6 +39,18 @@ So the graph reduction is basically finding the nodes with identical hash and re
 
 When all redundant nodes are pruned, the remaining nodes are numbered, preserving the correct order of indices in child groups. The nodes are stored as a single 32-bit integer. 8 bits are used for a letter value, 2 bits are used for End-Of-Word and End-Of-Children-List flags, the remaining 22 bits are used to store the index of the first child. This format limits the size of the graph (only 2^22-1 = about 4M nodes can be stored), but it's enough for my needs. For example English Scrabble TWL06 requires only 120k nodes and similar dictionary for Polish language occupies only 350k nodes.
 
+### Use of bitpacking is supported
+
+By the use of:
+
+    char* encode(char* in, size_t in_size, size_t* out_size);
+    char* decode(char* in, size_t in_size, size_t* out_size);
+
+The size of the data on disk can be reduced.
+
+Just use encode before writing the char* to disk and use decode after reading it from disk, so to properly search in it (uncompressed).
+
+	
 ## Results
 TWL06 with 178691 words is encoded as 120223 nodes, encoding takes about 4 seconds.
 Polish Scrabble dictionary from http://sjp.pl/slownik/growy/ with 2753263 words is encoded as 359558 nodes, encoding takes about 55 seconds.
