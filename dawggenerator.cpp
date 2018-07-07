@@ -292,7 +292,7 @@ void reduceGraph(GraphNode &rootNode, int maxNodeDepth) {
         UniqueNodeSet uniqueNodes(GraphNode::compareByHashThenDirect);
         rootNode.findNodesAtDepth(currentDepth, uniqueNodes);
 
-        printf("%d nodes\n", uniqueNodes.size());
+        printf("%d nodes\n", (int)uniqueNodes.size());
 
         if (uniqueNodes.size() > 1) {
             for (auto node = uniqueNodes.begin(), nextNode = node; node != uniqueNodes.end(); node = nextNode) {
@@ -410,7 +410,7 @@ int main(int argc, char* argv[]) {
         vector<GraphNode*> indexedNodes;
         rootNode.indexNodes(indexedNodes);
         assert(indexedNodes.size() < (KChildIndexMask >> KChildBitShift));
-        printf("Will save %d nodes\n", indexedNodes.size());
+        printf("Will save %d nodes\n", (int)indexedNodes.size());
 
         printf("Encoding graph\n");
         encodeGraph(indexedNodes);
